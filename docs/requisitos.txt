@@ -1,0 +1,21 @@
+Requisitos funcionais:                
+RF01 — Cadastro de usuários           
+RF02 — Login
+RF03 — Cadastro de livros
+RF04 — Consulta de livros
+RF05 — Atualização de livros
+RF06 — Exclusão de livros
+RF07 — Registro de empréstimo
+RF08 — Controle de disponibilidade
+RF09 — Registro de devolução
+RF10 — Histórico de empréstimos
+RF11 — Controle de atrasos
+RF12 — Dashboard
+
+Requisitos não funcionai:
+RNF01 — Segurança
+RNF02 — Autenticação
+RNF03 — Desempenho
+RNF04 — Usabilidade
+RNF05 — Responsividade
+RNF06 — Integridade dos dados
