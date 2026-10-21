@@ -1,4 +1,21 @@
+
+# Ambiente virtual Python
 .venv/
+venv/
+env/
+
+# Dependências e arquivos gerados
+node_modules/
 __pycache__/
-*.pyc
+*.py[cod]
+dist/
+build/
+
+# Arquivos de configuração local e segredos
 .env
+.env.*
+!.env.example
+
+# Arquivos do sistema operacional
+.DS_Store
+Thumbs.db
