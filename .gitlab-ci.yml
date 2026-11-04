@@ -92,12 +92,12 @@ lint_backend:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
     - if: '$CI_COMMIT_BRANCH'
 
+
 # ==================================================
 # 4. DOCKER
 # ==================================================
 
-# Constrói as imagens Docker para validar os Dockerfiles.
-# O Render também construirá as imagens ao receber o deploy.
+# Constrói e publica as imagens Docker no GitLab Container Registry.
 docker_build:
   stage: docker
   image: docker:27.5.1-cli
@@ -117,14 +117,27 @@ docker_build:
 
   script:
     # Constrói a imagem do backend.
-    - docker build -t biblioteca-backend:$CI_COMMIT_SHORT_SHA ./backend
+    - docker build -t "$CI_REGISTRY_IMAGE/biblioteca-backend:$CI_COMMIT_SHORT_SHA" ./backend
 
     # Constrói a imagem do frontend.
-    - docker build --build-arg VITE_API_URL="$VITE_API_URL" -t biblioteca-frontend:$CI_COMMIT_SHORT_SHA ./frontend
+    - docker build --build-arg VITE_API_URL="$VITE_API_URL" -t "$CI_REGISTRY_IMAGE/biblioteca-frontend:$CI_COMMIT_SHORT_SHA" ./frontend
+
+    # Faz login no Container Registry somente em pipelines de branch.
+    - |
+      if [ -n "$CI_COMMIT_BRANCH" ]; then
+        echo "$CI_REGISTRY_PASSWORD" | docker login "$CI_REGISTRY" -u "$CI_REGISTRY_USER" --password-stdin
+
+        # Publica a imagem do backend.
+        docker push "$CI_REGISTRY_IMAGE/biblioteca-backend:$CI_COMMIT_SHORT_SHA"
+
+        # Publica a imagem do frontend.
+        docker push "$CI_REGISTRY_IMAGE/biblioteca-frontend:$CI_COMMIT_SHORT_SHA"
+      fi
 
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
     - if: '$CI_COMMIT_BRANCH'
+
 
 # ==================================================
 # 5. DEPLOY
