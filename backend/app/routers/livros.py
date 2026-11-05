@@ -3,12 +3,7 @@ from sqlalchemy.orm import Session
 
 from app.database import get_db
 from app.models.livro import Livro
-from app.schemas.livro import (
-    LivroCreate,
-    LivroResponse,
-    LivroUpdate
-)
-
+from app.schemas.livro import LivroCreate, LivroResponse, LivroUpdate
 
 router = APIRouter(
     prefix="/livros",
@@ -23,7 +18,7 @@ router = APIRouter(
 )
 def criar_livro(
     livro: LivroCreate,
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db)  # noqa: B008
 ):
     livro_existente = (
         db.query(Livro)
@@ -60,7 +55,7 @@ def criar_livro(
     response_model=list[LivroResponse]
 )
 def listar_livros(
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db)  # noqa: B008
 ):
     livros = db.query(Livro).all()
 
@@ -73,7 +68,7 @@ def listar_livros(
 )
 def buscar_livro(
     livro_id: int,
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db)  # noqa: B008
 ):
     livro = (
         db.query(Livro)
@@ -97,7 +92,7 @@ def buscar_livro(
 def atualizar_livro(
     livro_id: int,
     dados: LivroUpdate,
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db)  # noqa: B008
 ):
     livro = (
         db.query(Livro)
@@ -129,7 +124,7 @@ def atualizar_livro(
 )
 def excluir_livro(
     livro_id: int,
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db)  # noqa: B008
 ):
     livro = (
         db.query(Livro)

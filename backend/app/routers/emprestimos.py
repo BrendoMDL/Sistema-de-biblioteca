@@ -2,14 +2,10 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
 from app.database import get_db
-from app.models.usuario import Usuario
-from app.models.livro import Livro
 from app.models.emprestimo import Emprestimo
-from app.schemas.emprestimo import (
-    EmprestimoCreate,
-    EmprestimoResponse
-)
-
+from app.models.livro import Livro
+from app.models.usuario import Usuario
+from app.schemas.emprestimo import EmprestimoCreate, EmprestimoResponse
 
 router = APIRouter(
     prefix="/emprestimos",
@@ -24,7 +20,7 @@ router = APIRouter(
 )
 def criar_emprestimo(
     dados: EmprestimoCreate,
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db)  # noqa: B008
 ):
 
     # Verifica se o usuário existe
@@ -85,7 +81,7 @@ def criar_emprestimo(
     response_model=list[EmprestimoResponse]
 )
 def listar_emprestimos(
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db)  # noqa: B008
 ):
     emprestimos = (
         db.query(Emprestimo)
@@ -101,7 +97,7 @@ def listar_emprestimos(
 )
 def buscar_emprestimo(
     emprestimo_id: int,
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db)  # noqa: B008
 ):
     emprestimo = (
         db.query(Emprestimo)
@@ -124,7 +120,7 @@ def buscar_emprestimo(
 )
 def devolver_livro(
     emprestimo_id: int,
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db)  # noqa: B008
 ):
     emprestimo = (
         db.query(Emprestimo)

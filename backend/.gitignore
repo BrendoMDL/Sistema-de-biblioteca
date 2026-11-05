@@ -18,9 +18,3 @@ build/
 # Arquivos do sistema operacional
 .DS_Store
 Thumbs.db
-=======
-.venv/
-__pycache__/
-*.pyc
-.env
-

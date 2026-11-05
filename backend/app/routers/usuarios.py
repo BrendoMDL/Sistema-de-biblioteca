@@ -3,11 +3,7 @@ from sqlalchemy.orm import Session
 
 from app.database import get_db
 from app.models.usuario import Usuario
-from app.schemas.usuario import (
-    UsuarioCreate,
-    UsuarioResponse
-)
-
+from app.schemas.usuario import UsuarioCreate, UsuarioResponse
 
 router = APIRouter(
     prefix="/usuarios",
@@ -22,7 +18,7 @@ router = APIRouter(
 )
 def criar_usuario(
     usuario: UsuarioCreate,
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db)  # noqa: B008
 ):
     usuario_email = (
         db.query(Usuario)
@@ -69,7 +65,7 @@ def criar_usuario(
     response_model=list[UsuarioResponse]
 )
 def listar_usuarios(
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db)  # noqa: B008
 ):
     usuarios = db.query(Usuario).all()
 
@@ -82,7 +78,7 @@ def listar_usuarios(
 )
 def buscar_usuario(
     usuario_id: int,
-    db: Session = Depends(get_db)
+   db: Session = Depends(get_db)  # noqa: B008
 ):
     usuario = (
         db.query(Usuario)
