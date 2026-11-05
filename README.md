@@ -326,3 +326,7 @@ O projeto tem como objetivo demonstrar o desenvolvimento de uma aplicação web 
 A utilização do GitLab CI/CD permite automatizar verificações de compilação, execução de testes, análise de qualidade, construção e publicação de imagens Docker e solicitação de implantação da aplicação.
 
 Com isso, o projeto demonstra como a automação pode contribuir para a identificação antecipada de erros, a padronização do processo de desenvolvimento e a entrega de versões da aplicação em um ambiente acessível pela internet.
+
+## Menções:
+Foi utilizado a inteligência artificial: chatgpt
+Ajudou como suporte para a criação do readme e resolver alguns problemas no código para a melhor otimizção de tempo.
